@@ -1,7 +1,7 @@
-from follow import follow
+from .follow import follow
 import csv
-import report
-import tableformat
+from . import report
+from . import tableformat
 
 
 def convert_types(rows, types):
@@ -32,7 +32,6 @@ def ticker(portfile, logfile, fmt):
     lines = follow(logfile)
     rows = parse_stock_data(lines)
     rows = (row for row in rows if row['name'] in portfolio)
-    rows = filter_symbols(rows, portfolio)
     formatter = tableformat.create_formatter(fmt)
     formatter.headings(['Name', 'Price', 'Change'])
     for row in rows:
